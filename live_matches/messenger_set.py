@@ -14,7 +14,7 @@ from user_panel.models import ActualMatchs
 
 # 
 def send__all__matches(user_id):
-    bot = Bot('EAAKJqqfPCVoBAD66oNpda6TlmIvd14UlKeYexKHV9DY6R8RkzgaV3XubGHyWmDZB9MX8zlZAyEj263HddOnYxKOF8j5ZB0k1uAQCxyNEmtRVIs7n5IM23D91QkFRRzMIU8eUCBQLINRtE7otG0p4ubKr5f2bLZA2xi4stpvbqzZCvqoZA7cQU4')
+    bot = Bot('*') # Personal Facebook API token
     bot.send_text_message(user_id, 'Witam, aktualnie trwają następujące mecze, wybierz ten który Cię interesuje i zaktualizuj wynik.')
     for match in ActualMatchs.objects.filter(live=True):
         
