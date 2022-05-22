@@ -59,7 +59,7 @@ https://user-images.githubusercontent.com/83407728/169329407-4ea502c2-11d5-4105-
  - ### Blog system:
  &emsp; Everyone can add a article to blog, but users with group 'user' after added must wait for accept from editor or admin. In every article all login in users can add a comment. If you add a option 'artykuł sponsorowany' your entry show on home page (can show only 5 latest entries). If you click 'CZYTAJ WIĘCEJ' you see all articles. You can sorted in by league. In rights side of article details you can see a last 5 'sponsor entries'. 
  
- #### Watch presentation on youtube (in polish language) [https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel](https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel)
+ #### Watch presentation on youtube (in polish language) [youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel](https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel)
 
 ## Deploy
 I'm using heroku to host website. Heroku redis is need to django celery. I'm connect my project with AMAZON AWS S3 to host static files. 
