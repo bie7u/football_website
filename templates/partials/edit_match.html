@@ -1,0 +1,39 @@
+{% load static %}
+{% load sort_table %}
+
+<div hx-target="this" hx-swap="outerHTML">
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="edit_match_container">
+    <div class="edit_match_team_home">
+        {{choose_match_obj.team_home}}
+    </div>
+
+    <div class="edit_match_team_home_result">
+        {{form.team_home_result|addclass:"result_pad_change"}}
+    </div>
+
+    <div class="edit_match_team_versus_result">
+        {{form.team_versus_result|addclass:"result_pad_change"}}
+    </div>
+
+    <div class="edit_match_team_versus">
+        {{choose_match_obj.team_versus}}
+    </div>
+</div>
+<div>
+    <p>{{form.match_info|addclass:"result_pad_change"}}</p>
+</div>
+<div>
+    <p>{{form.referee|addclass:"result_pad_change"}}</p>
+</div>
+<div class="edit_match_date_time">
+    <div style="width: 200px;">{{form.day}}</div>
+    <div style="width: 200px;">{{form.hour}}</div>
+</div>
+
+
+<p><button class="button-2" style="background-color: green;" hx-post="{% url 'edit_round_match' league_id round_id id %}">Zaktualizuj</button></p>
+</form>
+</div>

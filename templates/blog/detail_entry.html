@@ -1,0 +1,126 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+{% block content %}
+
+<section class="detail__blog__con">
+<div class="detail__blog_container">
+    <div class="entry__container">
+        <div class="blog__image__container">
+            <img src="{{entry.thumbnail.url}}" class="responsive__blog__image">
+            <div class="bottom-left">
+                {% if entry.team %}
+                <a href="{% url 'detail-name' entry.team.id %}" class="detail__blog__etc">
+                    <span class="detail__blog__team">{{entry.team}}</span>
+                </a>
+                {% endif %}
+                {% if entry.league %}
+                <a href="{% url 'show_league' entry.league.id %}" class="detail__blog__etc">
+                    <span class="detail__blog__league">{{entry.league}}</span>
+                </a>
+                {% endif %}
+                <div class="detail__blog__etc">
+                    <p class="style__blog__detail__title">{{entry.title}}</p> 
+                </div>
+            </div>
+        </div>
+
+    <div class="detail__blog__author">
+        <p><span style="font-weight: bold;">{{entry.author}}</span> {{entry.publicate_at|date:"d.m.Y H:i"}}</p>
+    </div>
+
+    <div class="detail__blog__entry">
+        {{entry.entry|safe}}
+    </div>
+    {% if entry.league %}
+    <div hx-target="this" hx-swap="outerHTML">
+    <a hx-get="{% url 'show-league-table' entry.league.id %}" style="text-decoration: none; text-align: center;" href=""><p class="choose__league__styl">Zobacz Tabele</p></a>
+    </div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <section class="comment__container">
+        <div class="comment__container__styl">
+            <h1>Dodaj komentarz do meczu:</h1>
+    <form method="POST">
+            {% csrf_token %}
+            {{form.comment|addclass:'comment_input'}}
+        
+        <button style="background-color: green; width: 100%;" class="button-1">Dodaj komentarz</button>
+    </form>
+    </div>
+    </section>
+    {% endif %}
+
+    </div>
+
+    <div class="latest__entries__container">
+        <div class="blog__detail__all__entries">
+            {% for article in latest_sponsor_articles %}
+            <div class="one__entry">
+                <div class="blog__image__container">
+                    <a href="{% url 'detail-entry' article.id %}">
+                    <img src="{{article.thumbnail.url}}" class="responsive__blog__image">
+                    <div class="bottom-left">
+                        {% if article.team %}
+                        <a class="detail__blog__etc">
+                            <span class="detail__blog__team">{{article.team}}</span>
+                        </a>
+                        {% endif %}
+                        {% if article.league %}
+                        <a class="detail__blog__etc">
+                            <span class="detail__blog__league">{{article.league}}</span>
+                        </a>
+                        {% endif %}
+                        <div class="detail__blog__etc">
+                            <a style="text-decoration: none; color: white;" href="{% url 'detail-entry' article.id %}" class="style__blog__detail__title">{{article.title}}</a> 
+                        </div>
+                    </div>
+                </a>
+                </div>
+           
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="detail__blog__under__articles">
+        {% for article in latest_articles %}
+        <div class="one__entry3">
+            <a href="{% url 'detail-entry' article.id %}">
+            <div class="blog__image__container">
+                <img src="{{article.thumbnail.url}}" class="responsive__blog__image">
+                <div class="bottom-left">
+                    <a href="" class="detail__blog__etc">
+                        <span class="detail__blog__team">{{article.team}}</span>
+                    </a>
+                    <a href="" class="detail__blog__etc">
+                        <span class="detail__blog__league">{{article.league}}</span>
+                    </a>
+                    <div class="detail__blog__etc">
+                        <a href="{% url 'detail-entry' article.id %}" style="text-decoration: none; color: white;" class="style__blog__detail__title">{{article.title}}</a> 
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+       
+</div>
+{% for comment in comments %}
+    
+<div class="comment__render__container">
+<div class="comment__render__particular">
+    <h4>{{comment.user}}</h4> 
+    <p>{{comment.comment}}</p>
+</div>
+</div>
+{% endfor %}
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="manage__blog__container">
+
+
+    <div class="manage__blog__container__sc">
+        <span class="add__blog__entry__header">Prośby o aktualizacje informacji o druzynie</span>
+    {% for i in edit_teams %}
+    <div class="manage__blog__particular__article">
+        <div>
+            <p><strong>Drużyna: </strong>{{i.team}}</p>
+            <p><strong>Opis: </strong>{{i.describe}}</p>
+            <p><strong>Prezes: </strong>{{i.chairman}}</p>
+            <p><strong>Trener: </strong>{{i.coach}}</p>
+            <p><strong>Barwy: </strong>{{i.colors}}</p>
+            <p><strong>Data powstania: </strong>{{i.date_of_creation}}</p>
+            <p><strong>Kapitan: </strong>{{i.capitan}}</p>
+            <p><strong>Stadion: </strong>{{i.stadium}}</p>
+            <p><strong>Użytkownik, wysłał aktualizacje: </strong>{{i.user}}</p>
+
+            <a hx-get="{% url 'update-team-info' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #6666ff; font-size: 15px;">Zaktualizuj dane</a>
+
+        </div>
+    </div>
+    <div hx-target="this" hx-swap="outerHTML">
+
+    </div>
+    <br>
+    {% endfor %}
+    </div>
+
+</section>
+
+
+{% endblock content %}

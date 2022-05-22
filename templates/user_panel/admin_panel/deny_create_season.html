@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <section class="main__user__container">
+        <div class="main__user__container_sc">
+            <div class="user__nav__container">
+                {% include 'user_panel/user_panel_nav.html' %}
+            </div>
+            <div class="user__work__part">
+                <div class="user__work__part__sc" style="padding:50px">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h2 class='text-center m'>Jesteś pewny, że chcesz anulować dodawanie sezonu?</h2>
+                        <div class='text-center'>
+                        <input class="button-1" type="submit" value="Tak" />
+                        <p><a class="button-2" href="{% url 'create_seasons' %}">Anuluj </a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock content %}

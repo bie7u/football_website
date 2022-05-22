@@ -1,0 +1,17 @@
+{% load static %}
+
+{% if results %}
+
+    {% csrf_token %}
+    <div class="search__team__container">
+    {% for team in results %}
+        <div class="search__team__styl">
+            <a class="team_search_particular" href="{% url 'detail-name' team.id %}">{{team}}</a>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>Brak drużyny o takiej nazwie</p>
+{% endif %}
+
+
+

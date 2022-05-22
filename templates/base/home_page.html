@@ -1,0 +1,46 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<div class="grid-wrapper">
+    {% if latest_sponsor_article %}
+    <a href="{% url 'detail-entry' latest_sponsor_article.id %}" class="grid-item item-1 hover__article">
+        <span class="article">
+        <img src="{{latest_sponsor_article.thumbnail.url}}" class="img__styl" alt="">
+        
+        <div class="caption article__title">{{latest_sponsor_article.title}}</div>
+    </span>
+    </a>
+    {% endif %}
+    {% if sponsor_articles %}
+    {% for sponsor_article in sponsor_articles %}
+    <a href="{% url 'detail-entry' sponsor_article.id %}" class="grid-item item-2 hover__article">
+        <span class="article">
+            <img src="{{sponsor_article.thumbnail.url}}" class="img__styl" alt="">
+    
+            <div class="caption article__title font__small__article">{{sponsor_article.title}}</div>
+        </span>
+    </a>
+    {% endfor %}
+    {% endif %}
+</div>
+
+<a href="{% url 'show-blog' %}" class="read__more__styl">
+    <span class="read__more__styl_font">Czytaj Więcej...</span>
+</a>
+
+
+<section>
+        <div>
+            {% for league in leagues %}
+            <div hx-target="this" hx-swap="outerHTML">
+            <p style="text-align: center;"><button class="choose__league__styl" hx-get="{% url 'show-league-table' league.id %}">{{league}}</button></p>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+<h1>Podsumowanie</h1>
+
+<p>Nazwa ligi: {{league}} <a href="{% url 'change_name_league' league.id %}">Aktualizuj</a></p>
+<p>Link do aktualnego sezonu (Łączy nas piłka): <a href="{{actual_season_link.link}}">{{actual_season_link.link}}</a> <a href="{% url 'change_actual_link' actual_season_link.id %}">Aktualizuj</a></p>
+
+<p>Linki do poprzednich sezonów: </p>
+
+{% for link in archive_season_links %}
+<p>Sezon: {{link.season}} - <a href="{{link.link}}">{{link.link}}</a></p>
+
+{% endfor %}
+
+<a href="{% url 'archives_seasons' %}">Dodaj lub zmien linki do poprzednich sezonów</a>
+
+<a href="{% url 'transfer_archives_seasons' %}"><h1>Rozpocznij przechwytywanie</h1></a>
+
+<p><a href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>

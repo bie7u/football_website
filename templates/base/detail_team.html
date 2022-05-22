@@ -1,0 +1,54 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+<section class="team__particulary__container">
+    <div class="team__particulary__container__styl">
+        <div class="team__particulary__part1">
+            <div class="team__particulary__image">
+                {% if team_profile.arms_of_team %}
+                <img src="{{team_profile.arms_of_team.url}}" class="team__particulary__image__styl">
+                {% endif %}
+            </div>
+            <div class="team__particulary__data">
+                <p class="team__particulary__name__styl">{{team}}</p>
+                <p><span style="padding:5px; font-weight:bold">Prezes:</span> {{team_profile.chairman}}</p>
+                <p><span style="padding:5px; font-weight:bold">Trener:</span> {{team_profile.coach}}</p>
+                <p><span style="padding:5px; font-weight:bold">Barwy:</span> {{team_profile.colors}}</p>
+                <p><span style="padding:5px; font-weight:bold">Data powstania:</span> {{team_profile.date_of_creation|date:"d.m.Y"}}</p>
+                <p><span style="padding:5px; font-weight:bold">Kapitan:</span> {{team_profile.capitan}}</p>
+                <p><span style="padding:5px; font-weight:bold">Stadion:</span> {{team_profile.stadium}} </p>
+                <p><span style="padding:5px; font-weight:bold">Dodatkowe informacje:</span> {{team_profile.describe}}</p>
+            </div>
+
+        </div>
+
+        <div class="team__particulary__seasons">
+            <div>
+            <p><span style="font-weight:bold; font-size: 22px;">Aktualny sezon: </span></p>
+            {% if current_league %}
+            <p><a href="{% url 'show_league' current_league.id %}" style="text-decoration:none; color:black">{{current_league}}</a></p>
+            {% else %}
+            <p>Drużyna nie uczestniczy w żadnych rozgrywkach bądź awansowała na szczebel centralny</p>
+            {% endif %}
+            </div>
+
+            <div>
+                <p><span style="font-weight:bold; font-size: 22px;">Poprzednie sezony: </span></p>
+                {% for season, league in last_seasons.items %}
+                <p><a href="{% url 'show_league' league.id %}" style="text-decoration:none; color:black">{{league}} {{season}}</a></p>
+                {% endfor %}
+                </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="team__particulary__apply__button">
+            <a href="{% url 'edit-team-info' team_id %}" class="button-2">Zgłoś się do edycji klubu   </a>         
+        </div>
+        {% endif %}
+    </div>
+
+</section>
+
+{% endblock content %}

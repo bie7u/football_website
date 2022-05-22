@@ -1,0 +1,31 @@
+{% load static %}
+{% load sort_table %}
+
+<div hx-get="{% url 'edit-result' id %}" hx-target="this" hx-swap="outerHTML">
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="edit_match_container">
+    <div class="edit_match_team_home">
+        {{choose_match_obj.team_home}}
+    </div>
+
+    <div class="edit_match_team_home_result">
+        {{form.team_home_result}}
+    </div>
+
+    <div class="edit_match_team_versus_result">
+        {{form.team_versus_result}}
+    </div>
+
+    <div class="edit_match_team_versus">
+        {{choose_match_obj.team_versus}}
+    </div>
+</div>
+<div>
+    <p>{{form.match_info}}</p>
+</div>
+</form>
+
+</div>
+

@@ -1,0 +1,53 @@
+{% extends 'base/main.html' %}
+{% load sort_table %}
+{% block content %}
+
+<section class="timetable__container">
+    <div class="timetable__container__sty">
+     <div class="actuall__timetables">
+                        <span class="styl__round__number" style="margin-top: 10px;">
+                            Edytuj {{round|del_}} {{league}}</span>
+                            {% for match in matchs_in_round %}
+                            <div class="timetable__styls__second" hx-target="this" hx-swap="outerHTML">
+                            <div class="edit_match_date tooltip">
+                                {{match.day|date:"d.m.Y"}}
+                            </div>
+                            <div class="edit_match_th">
+                                <a href="{% url 'detail-name' match.team_home.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_home}}</a>
+                            </div>
+                            
+    
+                            <div class="edit_match_result">
+                                <a href="{% url 'detail_match' match.id %}" style="text-decoration: none; color: black;">{{match.team_home_result}} - {{match.team_versus_result}}</a>
+                                <p><button hx-get="{% url 'edit_round_match' match.league.id match.round.id match.id %}" class="button-2" style="text-decoration: none; color: black; background-color: red;">Edytuj</button></p>
+                            </div>
+    
+                            <div class="edit_match_tv">
+                                <a href="{% url 'detail-name' match.team_versus.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_versus}}</a>
+                            </div>
+
+                            <div class="edit_round_button">
+                            </div>
+                            </div>
+                            {% endfor %}
+                        <div style="padding: 10px; width: 100%;" hx-target="this" hx-swap="outerHTML">
+                            Informacje o kolejce: 
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{form.info|addclass:"style__input"}}
+                            <input class="button-3" type="submit" value="Dodaj">
+                            </form>
+
+                            
+                        </div>
+                        </div>
+                        
+
+
+                
+                        
+     </div>
+    </div>
+</section>
+
+{% endblock content %}

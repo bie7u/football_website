@@ -1,0 +1,7 @@
+<div hx-target="this" hx-swap="outerHTML">
+    <button method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button hx-post="{% url 'add-round-info' league_id round_id %}" class="button-1" type="submit">esess</button>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+
+<section class="main__user__container">
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work__part">
+            <div class="user__work__part__sc" style="padding:50px">
+                <h1 style="font-size:38px;">Wybierz lige, którą chcesz aktualizować:</h1>
+
+                {% for league in leagues %}
+                
+                <a style="text-decoration: none;" href="{% url 'modern_league_menu' league.id %}"><p class="choose__league__styl">{{league}}</p></a>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

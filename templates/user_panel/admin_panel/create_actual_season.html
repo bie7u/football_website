@@ -1,0 +1,31 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+
+<section class="main__user__container">
+        
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work__part">
+            <div class="user__work__part__sc">
+                <h1 style="font-size:42px">Kontynuuj dodawanie ligi</h1>
+                <h3>Tworzysz lige o nazwie: {{league}}</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <h3>Podaj link do aktualnego sezonu ze strony <a target="_blank" href="http://www.90minut.pl/">90minut.pl</a></h3>
+                    {{form.link}}
+                    <input type="submit" value="Przejdź do kolejnego kroku">
+                </form>
+                <p><a style="width:30%; text-decoration:none" class="button-2" href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

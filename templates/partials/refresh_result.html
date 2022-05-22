@@ -1,0 +1,14 @@
+<div style="font-weight: bold;" hx-get="{% url 'refresh-result' id %}" hx-swap="outerHTML" hx-trigger="every 2s">
+    {% if live_match.live %}
+    <a href="{% url 'detail_match' live_match.id %}" style="text-decoration: none; color: black;">{{live_match.team_home_result}} - {{live_match.team_versus_result}}</a>
+    {% elif not live_match.live %}
+            {% if not live_match.team_home_result %}
+                -
+            {% elif live_match.team_home_result %}
+                <a href="{% url 'detail_match' live_match.id %}" style="text-decoration: none; color: black;">{{live_match.team_home_result}} - {{live_match.team_versus_result}}</a>
+            {% endif %}
+    {% endif %}
+    
+
+</div>
+    

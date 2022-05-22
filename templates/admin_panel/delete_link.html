@@ -1,0 +1,9 @@
+
+    <form method="POST">
+        {% csrf_token %}
+        <h2 class='text-center m'>Jesteś pewny, że chcesz usunąć link?</h2>
+        <div class='text-center'>
+        <input type="submit" value="Tak" />
+        <a href="{% url 'archives_seasons' %}">Anuluj </a>
+        </div>
+    </form>

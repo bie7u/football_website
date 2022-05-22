@@ -1,0 +1,23 @@
+{% load sort_table %}
+
+
+<div class="user__nav__options">
+    <span class="user__nav__opt__styl">Ustawienia profilu</span>
+    <a class="selo" href="{% url 'edit-profile' %}"><span class="user__nav__option__styl">Profil</span></a>
+    {% if request|get_group == 'user' %}
+    <span class="user__nav__opt__styl">Opcje</span>
+    <a class="selo" href="{% url 'add-article' %}"><span class="user__nav__option__styl">Dodaj artykuł</span></a>
+    {% endif %}
+    {% if request|get_group == 'editor' or request|get_group == 'admin' %}
+    <span class="user__nav__opt__styl">Panel Redaktora</span>
+    <a class="selo" href="{% url 'add-article' %}"><span class="user__nav__option__styl">Dodaj artykuł</span></a>
+    <a class="selo" href="{% url 'manage-teams' %}"><span class="user__nav__option__styl">Zarządaj drużynami</span></a>
+    <a class="selo" href="{% url 'manage-blog' %}"><span class="user__nav__option__styl">Zarządzaj blogiem</span></a>
+    <a class="selo" href="{% url 'edit_league' %}"><span class="user__nav__option__styl" href="">Moderuj lige</span></a>
+    {% endif %}
+
+    {% if request|get_group == 'admin' %}
+    <span class="user__nav__opt__styl">Admin Panel</span>
+    <a class="selo" href="{% url 'create_league' %}"><span class="user__nav__option__styl">Dodaj lige</span></a>
+    {% endif %}
+</div>

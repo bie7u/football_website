@@ -1,0 +1,7 @@
+<h1>Wybierz lige, którą chcesz zmodernizować</h1>
+
+{% for league in leagues %}
+
+<p><a href="{% url 'modern_league_menu' league.id %}">{{league}}</a></p>
+
+{% endfor %}

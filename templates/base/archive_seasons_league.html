@@ -1,0 +1,25 @@
+
+
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="main__user__container">
+    <div class="main__user__container_sc">
+        <div class="user__work__part">
+            <div class="user__work__part__sc" style="padding:50px">
+                <span class="add__blog__entry__header">Wybierz sezon, który chcesz zobaczyć: </span>
+
+                {% for season in archive_seasons %}
+                
+                <a style="text-decoration: none;" href="{% url 'particular_archive_season' id season.id %}""><p class="choose__league__styl">{{season}}</p></a>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

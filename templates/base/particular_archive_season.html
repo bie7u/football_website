@@ -1,0 +1,164 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+{% for league, match_info in tables.items %}
+<section class="tables">
+    <div class="league__section">
+        <div class="name__league">
+            <a class="styl__name__league">{{league}} {{season}}</a>
+        </div>
+
+    <div class="league__timetable__section_s">
+            <div class="teams_archive">
+                <div class="table__set">
+                    <div class="position">
+                        
+                    </div>
+
+                    <div class="team" style="font-weight:bold">
+                        Drużyna
+                    </div>
+                    <div class="finished_matchs" style="font-weight:bold"> 
+                        RZ
+                    </div>
+                    <div class="points" style="font-weight:bold">
+                        Pkt.
+                    </div>
+                    <div class="matchs__wins" style="font-weight:bold">
+                        W
+                    </div>
+                    <div class="matchs__draws" style="font-weight:bold">
+                        R
+                    </div>
+                    <div class="matchs__lose" style="font-weight:bold">
+                        P
+                    </div>
+                    <div class="goals__scored" style="font-weight:bold">
+                        BZ
+                    </div>
+                    <div class="goals__conceded"" style="font-weight:bold">
+                        BS
+                    </div>
+            
+                </div>
+
+                
+                {% for table_data in match_info.0  %}
+                {% with table_data_=table_data.0.1.0.values|sequence %}
+                <a href="{% url 'detail-name' table_data.0.0.id %}" style="text-decoration: none; color: black;">
+                {% if forloop.counter|promotion:league.promote_to %}
+                <div class="table__set" style="background-color: #e6ff07;">
+                {% elif match_info.0|length|subtraction:forloop.counter|relegation:league.relegation_to %}
+                <div class="table__set" style="background-color: red;">
+                {% else %}
+                <div class="table__set">
+                {% endif %}
+                    <div class="position">
+                        {{table_data.1}}.
+                    </div>
+
+                    <div class="team">
+                        {{table_data.0.0}}
+                    </div>
+                    <div class="finished_matchs"> 
+                        {{table_data_.6}}
+                    </div>
+                    <div class="points">
+                        {{table_data_.0}}
+                    </div>
+                    <div class="matchs__wins">
+                        {{table_data_.1}}
+                    </div>
+                    <div class="matchs__draws">
+                        {{table_data_.2}}
+                    </div>
+                    <div class="matchs__lose">
+                        {{table_data_.3}}
+                    </div>
+                    <div class="goals__scored">
+                        {{table_data_.4}}
+                    </div>
+                    <div class="goals__conceded">
+                        {{table_data_.5}}
+                    </div>
+                </div>
+                </a>
+                {% endwith %}
+                {% endfor %}
+
+          
+
+            </div>
+    </div>
+    
+    </div>
+    {% endfor %}
+</section>
+
+
+
+
+<div class="info__about__match__container">
+    {% if request|get_group == 'admin' or request|get_group == 'editor' %}
+    <div hx-target="this" hx-swap="outerHTML">
+
+        <button class="button-3" hx-get="{% url 'add-archive-info' league.id season.id %}">Dodaj Opis</button>
+    </div>
+    {% endif %}
+    {% if info_about_league %}
+    <h2>Informacje o lidze</h2>
+    <p>{{info_about_league.info}}</p>
+</div>
+{% endif %}
+
+
+<section class="timetable__container">
+<div class="timetable__container__sty">
+ <div class="actuall__timetables">
+            {% for round, x in time_table.items %}
+                    <span class="styl__round__number" style="margin-top: 10px;">
+                        {{round|del_}}
+
+                         </span>
+                    <div class="timetable__styl">
+                        {% for n in x %}
+                        <div class="date__timetable tooltip">
+                            {{n.day|date:"d.m.Y"}}
+                            {{n.hour|time:"H:i"}}
+                            {% if n.match_info %}
+                            <div style="font-size: 20px;" class="tooltip-2 fas fa-info-circle">
+                                <span class="tooltiptext-2">{{n.match_info}}</span>
+                              </div>
+                            
+                            {% endif %}
+                            {% if n.live %}
+                            <a href="" class="fa-solid fa-record-vinyl" style="color:red; background-color: #e6e6e6;"></a> <span class="tooltiptext">Przejdź do relacji na żywo</span>
+                            {% endif %}
+                        </div>
+                        <div class="team__home__styl">
+                            <a href="{% url 'detail-name' n.team_home.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{n.team_home}}</a>
+                        </div>
+                        
+
+                        <div class="result__styl">
+                            <a style="text-decoration: none; color: black;">{{n.team_home_result}} - {{n.team_versus_result}}</a>
+                        </div>
+
+                        <div class="team__versus__styl">
+                            <a href="{% url 'detail-name' n.team_versus.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{n.team_versus}}</a>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                    
+            </div>
+        </div>
+        </section>
+
+
+
+{% endblock content %}
+

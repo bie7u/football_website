@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-end mb-4">
+    {% csrf_token %}
+    <input type="text"
+        hx-post="{% url 'search-team' %}" 
+        hx-target='#results'
+        hx-trigger="keyup changed delay:500ms"
+        name="search"
+        style="width: 100%;"
+        placeholder="Wyszukaj drużyne..." />
+    
+    </form>
+</div>
+<div id="results"></div>
+
+

@@ -1,0 +1,43 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="manage__blog__container">
+
+
+    <div class="manage__blog__container__sc">
+        <span class="add__blog__entry__header">Zaktualizuj informacje na temat</span>
+
+        <div class="fsdfsadfasdfsdafds"> 
+        <span>Jeżeli jesteś związany z <strong>{{team.team}}</strong> lub posiadasz informacje na jego temat prosimy o wypełnienie poniższych pól. Dane zostaną przesłane do administratorów, którzy
+            zweryfikują i zaktualizują informacje o zespole.
+        </span>
+            
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p>{{form.describe|addclass:"style__input"}}</p>
+                        <p>{{form.chairman|addclass:"style__input"}}</p>
+                        <p>{{form.coach|addclass:"style__input"}}</p>
+                        <p>{{form.colors|addclass:"style__input"}}</p>
+                        <p>{{form.date_of_creation|addclass:"style__input"}}</p>
+                        <p>{{form.capitan|addclass:"style__input"}}</p>
+                        <p>{{form.stadium|addclass:"style__input"}}</p>
+                        <p>{{form.arms_of_team|addclass:"style__input"}}</p>
+                        <input type="submit" value="Prześlij do aktualizacji">
+                    </form>
+        </div>
+    <div hx-target="this" hx-swap="outerHTML">
+
+    </div>
+    <br>
+    </div>
+
+</section>
+
+
+
+
+
+{% endblock content %}

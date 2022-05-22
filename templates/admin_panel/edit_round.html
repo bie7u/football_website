@@ -1,0 +1,12 @@
+<h1>Edytuj kolejke</h1>
+
+{% for match in matchs_in_round %}
+
+<p>{{match.team_home}} <a href="">{{match.team_home_result}}-{{match.team_versus_result}}</a> {{match.team_versus}} | 
+    {{match.date}} {{match.day|date:"d.m.Y"}} {{match.hour|time:"H:i"}}
+    <a href="{% url 'edit_round_match' match.league.id match.round.id match.id %}">Edytuj</a>
+
+</p>
+
+
+{% endfor %}

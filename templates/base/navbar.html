@@ -1,0 +1,54 @@
+
+<header class="header__styl">
+
+    <div class="logo__contact">
+        <div class="logo">
+            <h3>Wyniki.pl</h3>
+        </div>
+
+        <a href="{% url 'contact-form' %}" class="fa fa-envelope but__styl" aria-hidden="true">  Kontakt</a>
+
+    </div>
+    {% if not user.is_authenticated %}
+    <div class="login">
+
+        <div class="zoom__button">
+            <a class="login__button" href="{% url 'custom_login' %}">Zaloguj się</a>
+        </div>
+        <div class="zoom__button">
+            <a class="register__button" href="{% url 'custom_register' %}">Zarejestruj się</a>
+        </div>
+
+    </div>
+    
+    {% elif user.is_authenticated %}
+    <div class="login">
+
+        <div class="zoom__button">
+            <a class="login__button" href="{% url 'user-home' %}">{{request.user}}</a>
+        </div>
+        <div class="zoom__button">
+            <a class="register__button" href="{% url 'account_logout' %}">Wyloguj się</a>
+        </div>
+
+    </div>
+
+    {% endif %}
+</header>
+
+<div class="hamIcon" onclick="toggleClass()">
+    <h1 class="ham__icon">Menu</h1>
+    <h1 class="ham__icon">&#9776;</h1>
+</div>
+
+<nav>
+    <div class="nav__styl">
+        <ul class="mainMenu">
+            <a class="nav__link" href="{% url 'home-page' %}"><li>Strona główna</li></a>
+            <a class="nav__link" href="{% url 'live-matchs' %}"><li>Na żywo</li></a>
+            <a class="nav__link" href="{% url 'choose-league' %}"><li>Ligi</li></a>
+            <a class="nav__link" href="{% url 'teams-page' %}"><li>Drużyny</li></a>
+            <a class="nav__link" href="{% url 'archive_seasons' %}"><li>Archiwum</li></a>
+        </ul>
+    </div>
+</nav>

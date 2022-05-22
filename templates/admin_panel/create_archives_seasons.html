@@ -1,0 +1,23 @@
+<h1>Kontynuuj dodawanie ligi</h1>
+<h3>Tworzysz lige o nazwie: {{league}}</h3>
+
+<h3>Dodaj archiwalne sezony (90minut): </h3>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Dodaj">
+</form>
+<hr>
+
+{% for link in added_links %}
+
+<p>{{link.link}} {{link.season}} <a href="{% url 'delete_link' link.id %}">Usuń</a></p> 
+
+{% endfor %}
+<hr>
+
+
+<a href="{% url 'summary_create' %}">Przejdź do podsumowania</a>
+
+<p><a href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>

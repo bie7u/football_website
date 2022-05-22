@@ -1,0 +1,33 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+
+{% block content %}
+
+<section class="main__user__container">
+        
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work__part">
+            <div class="user__work__part__sc">
+                <span class="add__blog__entry__header">Ustawienia ligi</span>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>Dodaj informacje na temat ligi</p>
+                        {{form.info|addclass:'style__input'}}
+                        <input class="button-3" type="submit" value="Dodaj opis">
+
+                    </form>
+                    <h3>Ilosc druzyn które awansują: {{league_info.promote_to}}</h3>
+                    <h3>Ilosc druzyn które spadają: {{league_info.relegation_to}}</h3>
+                    <span style="font-size: 14px;">(Napisz do administratora jeśli chcesz zmienić powyższe liczby)</span>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

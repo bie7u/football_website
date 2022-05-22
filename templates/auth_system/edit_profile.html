@@ -1,0 +1,29 @@
+{% extends 'base/main.html' %}
+
+{% load static %}
+{% load sort_table %}
+
+
+{% block content %}
+
+<section class="edit__profile__container"> 
+    <div class="edit__profile__container_sc">
+            <div class="edit__profile__frst">
+                <p>Adres email: <strong>{{user.email}}</strong></p>
+                <p>Imię: <strong>{{user.first_name}}</strong></p>
+                <p>Nazwisko: <strong>{{user.last_name}}</strong></p>
+                <span>(Jeżeli chcesz zmienić te dane, skontaktuj się z administratorem)</span>
+            </div>
+            <div class="edit__profile__sc">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Twoja nazwa użytkownika: {{form.username|addclass:"style__input__sc"}}</p>
+                    <input type="submit" value="Zmień login" class="style__input__sc button-3">
+                </form>
+                <div hx-target="this" hx-swap="outerHTML">
+                <button hx-get="{% url 'change-password-user' %}" class="style__input__sc  button-3">Zmien hasło</button>
+                </div>
+            </div>
+    </div>
+</section>
+{% endblock content %}

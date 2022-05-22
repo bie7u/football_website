@@ -1,0 +1,26 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+
+<section class="main__user__container">
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work__part">
+            <div class="user__work__part__sc">
+                <h1>Dodaj ligę</h1>
+                <h3>Wypełniaj kolejne kroki aby dodać poprawnie lige</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.league}}
+                    <input type="submit" value="Przejdź do kolejnego kroku">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

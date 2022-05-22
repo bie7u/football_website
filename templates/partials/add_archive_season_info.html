@@ -1,0 +1,12 @@
+{% load sort_table %}
+
+<div hx-target="this" hx-swap="outerHTML">
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <p>{{form.info}}</p>
+            <p><button class="button-2" style="background-color: green;" hx-post="{% url 'add-archive-info' league season %}">Zaktualizuj</button></p>
+        </div>
+    </form>
+
+</div>

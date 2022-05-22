@@ -1,0 +1,60 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+
+
+<section class="teams__container">
+    <div class="teams__container__sc">
+        <section>
+            {% include 'partials/search.html' %}
+        </section>
+        {% for team in teams_pag %}
+        <div class="team__container">
+            <div class="team__arms">
+                {% if team.arms_of_team %}
+                <a href="{% url 'detail-name' team.id %}"><img src="{{team.arms_of_team.url}}" class="image__arms__style"></a> 
+                {% endif %}
+            </div> 
+            <div class="team_data">
+                    <a href="{% url 'detail-name' team.id %}" class="team__name__style"><p>{{team.team}}</p></a>
+                    <div>
+                        <a class="team__league__style">{{team.team|search_league}}</a>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if teams_pag.has_other_pages %}
+            <div class="pag">
+            <span class="pagination">
+        {% if teams_pag.has_previous %}
+            <span><a href="?page={{ teams_pag.previous_page_number }}">&laquo;</a></span>
+        {% else %}
+            <span class="disabled"><span>&laquo;</span></span>
+        {% endif %}
+        {% for i in teams_pag.paginator.page_range %}
+            {% if teams_pag.number == i %}
+                <span class="active"><span>{{i}} <span class="sr-only">(current)</span></span></span>
+            {% else %}
+                <span><a href="?page={{ i }}">{{i}}</a></span>
+            {% endif %}
+        {% endfor %}
+        {% if teams_pag.has_next %}
+            <span><a href="?page={{ teams_pag.next_page_number }}">&raquo;</a></span>
+        {% else %}
+            <span class="disabled"><span>&raquo;</span></span>
+        {% endif %}
+            </span>
+        {% endif %}
+            </div>
+        </div>
+
+</section>
+
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% load socialaccount %}
+{% load static %}
+
+{% get_providers as socialaccount_providers %}
+
+<div class="col">
+
+{% for provider in socialaccount_providers %}
+{% if provider.name == 'Google' %}
+    <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" class="google btn">
+        <i class="fa fa-google fa-fw"></i> Połącz się z Google
+    </a>
+<!-- {% elif provider.name == 'Facebook' %}
+    <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" class="fb btn">
+        <i class="fa fa-facebook fa-fw"></i> Połącz się z Facebook
+    </a> -->
+
+{% endif %}
+
+{% endfor %}
+</div>
+

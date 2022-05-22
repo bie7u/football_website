@@ -1,0 +1,51 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="blog__container" hx-target="this" hx-swap="outerHTML">
+    <div class="blog__category">
+        <h2 style="text-align: center;">Kategorie</h2>
+        {% for league in leagues %}
+        <div class="blog__category__con_sc">
+            <a hx-get="{% url 'show-category-entries' league.id %}" href="" style="text-decoration: none;">
+                <div class="blog__category__con">
+                    <p>{{league}}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="blog__entries">
+        {% for entry in entries %}
+        <div class="blog__entry__con">
+            <a href="{% url 'detail-entry' entry.id %}">
+                <div class="blog__image__container">
+                    <img src="{{entry.thumbnail.url}}" class="responsive__blog__image">
+
+                    <div class="bottom-left">
+                        {% if entry.team %}
+                        <a href="{% url 'detail-name' entry.team.id %}" class="detail__blog__etc">
+                            <span class="detail__blog__team">{{entry.team}}</span>
+                        </a>
+                        {% endif %}
+                        {% if entry.league %}
+                        <a href="{% url 'show_league' entry.league.id %}" class="detail__blog__etc">
+                            <span class="detail__blog__league">{{entry.league}}</span>
+                        </a>
+                        {% endif %}
+                        <div class="detail__blog__etc">
+                            <p class="style__blog__detail__title">{{entry.title}}</p> 
+                        </div>
+                    </div>
+                </div>
+                </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock content %}

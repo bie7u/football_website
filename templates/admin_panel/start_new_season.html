@@ -1,0 +1,8 @@
+<h1>Rozpocznij nowy sezon</h1>
+<h3>Aktualny sezon to: {{actual_season}}</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Prześlij">
+</form>

@@ -1,0 +1,74 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="manage__blog__container">
+
+
+    <div class="manage__blog__container__sc">
+        <span class="add__blog__entry__header">Artykułu oczekujące na Akceptacje</span>
+    {% for i in pending_approval_articles %}
+    <div class="manage__blog__particular__article">
+        <div>
+            <div hx-target="this" hx-swap="outerHTML">
+            <a href="{% url 'detail-entry' i.id %}" style="color: black; text-decoration: none;"><span style="font-weight: bold;">{{i.author}}: </span>{{i.title}} - <span>{{i.created_at|date:"d.m.Y H:i"}}</span></a>
+            <a href="{% url 'update-entry' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #6666ff; font-size: 15px;">Edytuj</a>
+            <a hx-get="{% url 'accept-entry' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #6666ff; font-size: 15px;">Opublikuj artykuł</a>
+            <butonn hx-get="{% url 'delete-entry' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #ff471a; font-size: 15px;">Usuń</butonn>
+            </div>
+        </div>
+    </div>
+    <div hx-target="this" hx-swap="outerHTML">
+
+    </div>
+    <br>
+    {% endfor %}
+    </div>
+
+
+    <div class="manage__blog__container__sc">
+            <span class="add__blog__entry__header">Zarządzaj artykułami na blogu</span>
+        {% for i in entries %}
+        <div class="manage__blog__particular__article">
+            <div>
+                <div hx-target="this" hx-swap="outerHTML">
+                <a href="{% url 'detail-entry' i.id %}" style="color: black; text-decoration: none;"><span style="font-weight: bold;">{{i.author}}: </span>{{i.title}} - <span>{{i.created_at|date:"d.m.Y H:i"}}</span></a>
+                <a href="{% url 'update-entry' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #6666ff; font-size: 15px;">Edytuj</a>
+                
+                <butonn hx-get="{% url 'delete-entry' i.id %}" class="button-2" style="text-decoration: none; color: black; background-color: #ff471a; font-size: 15px;">Usuń</butonn>
+                </div>
+            </div>
+        </div>
+        <div hx-target="this" hx-swap="outerHTML">
+
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+
+</section>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if entries.has_previous %}
+            <a style="text-decoration: none; color: black; font-weight: bold;" href="?page=1">&laquo; Pierwsza</a>
+            <a href="?page={{ entries.previous_page_number }}">Poprzednia</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ entries.number }} z {{ entries.paginator.num_pages }}.
+        </span>
+
+        {% if entries.has_next %}
+            <a href="?page={{ entries.next_page_number }}">Następna</a>
+            <a style="text-decoration: none; color: black; font-weight: bold;" href="?page={{ entries.paginator.num_pages }}">Ostatnia &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}

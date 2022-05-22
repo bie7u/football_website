@@ -1,0 +1,42 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+{% block content %}
+
+<section class="add__blog__entry__container">
+    <div class="add__blog__entry__container__sc">
+        <div class="add__blog__entry__header">
+            <p>Dodaj artykuł</p>
+        </div>
+
+        <div>
+            <form method="POST" enctype="multipart/form-data">
+                
+                <div class="add__blog__entry_forms">
+                    <!-- Security token -->
+                    {% csrf_token %}
+                    {{form.media}}
+                    <p>Tytuł: {{form.title|addclass:"inp_width"}}</p>
+                    <p>Treść: {{form.entry|addclass:"ckeditor"}}</p>
+                    <p style="margin-top: 10px;">Wybierz grafke (wymagane wymiary to 1920x1080){{form.thumbnail|addclass:"inp_width"}}</p>
+                    <span>Artykuł na temat (jeżeli nie dotyczy, pole można zostawić puste):</span>
+                    <div class="add__blog__entry__choose">
+                        {{form.team|addclass:"inp_width"}}
+                        {{form.league|addclass:"inp_width"}}
+                    </div>
+                    
+                    {{form.article_type|addclass:"inp_width"}}
+                    <div style="text-align: center;">
+                        {% if request|get_group == 'user' %}
+                        <h3>Artykuł zostanie przesłany do redakcji w celu sprawdzenia. Zostanie opubklikowany jeżeli zostanie zaakceptowany.</h3>
+                        {% endif %}
+                        <input class="button-1" type="submit" value="Prześlij artykuł">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

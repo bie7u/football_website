@@ -1,0 +1,44 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="main__user__container">
+        
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work">
+        <div class="user__work__part">
+            <div class="user_work_summary">
+                <h1 style="text-align: center; font-size: 42px;">Podsumowanie</h1>
+
+                <div class="user__summary__container">
+                    <div hx-target="this" hx-swap="outerHTML">
+                        <p style="font-size: 22px;" class="user__work_style__sumary">Nazwa ligi: <span style="font-weight: bold; background-color: #f7cba1; padding: 5px;">{{league}}</span>  <button style="background-color: green;" class="button-2" hx-get="{% url 'update-name-league' league.id %}">Zaktualizuj</button></p>
+                    </div>
+                    <div hx-target="this" hx-swap="outerHTML">
+                        <p style="font-size: 22px;">Link do aktualnego sezonu (90minut.pl): <a style="background-color: #f7cba1; padding: 5px;" target="_blank" href="{{actual_season_link.link}}">{{actual_season_link.link}}</a>  <button style="background-color: green;" class="button-2" hx-get="{% url 'update-actual-season-link' actual_season_link.id %}">Zaktualizuj</button></p>
+                    </div>
+                    
+                    {% for link in archive_season_links %}
+                        <p style="font-size: 22px;">Sezon: {{link.season}} - <a style="background-color: #f7cba1; padding: 5px;" target="_blank" href="{{link.link}}">{{link.link}}</a></p>
+                    {% endfor %}
+
+                    <a href="{% url 'archives_seasons' %}" style="text-decoration:none;">Dodaj lub zmien linki do poprzednich sezonów</a>
+
+                    <p style="text-align: center;"><a class="button-1" style="text-decoration: none;" href="{% url 'transfer_archives_seasons' %}">Rozpocznij przechwytywanie</a></p>
+    
+                    <p style="text-align: center;"><a class="button-2" href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% load static %}
+{% load sort_table %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wyniki.pl</title>
+    <link rel="stylesheet" type='text/css' media='screen' href="https://devbiel-s3-bucker.s3.eu-central-1.amazonaws.com/static/styles/style.css">
+    <script src="https://devbiel-s3-bucker.s3.eu-central-1.amazonaws.com/static/styles/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/ad507b054d.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+</head>
+
+<body>
+    
+
+<section class="edit_result__container">
+    
+    <span class="add__blog__entry__header">Edytuj mecz na żywo</span>
+
+    <div class="edit_result__container__sc">
+        <form method="POST">
+
+        {% csrf_token %}
+        <div class="edit__result__style">
+            <strong>{{match.team_home}} {{form.result_team_home|addclass:"style_input_fv"}} - {{form.result_team_versus|addclass:"style_input_fv"}} {{match.team_versus}}</strong>
+            <input type="submit" value="Wyślij do aktualizacji">
+            <p>Wynik zostanie wysłany do redaktorów i jeżeli przejdzie weryfikacje niezwłocznie zostanie zaktualizowany.</p>
+            <a href="{% url 'live-matchs' %}" class="button-1">Powrót</a>
+        </div>
+        </form>
+
+        
+    </div>
+    
+</section>
+
+</body>

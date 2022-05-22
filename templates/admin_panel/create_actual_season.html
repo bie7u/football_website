@@ -1,0 +1,12 @@
+<h1>Kontynuuj dodawanie ligi</h1>
+<h3>Tworzysz lige o nazwie: {{league}}</h3>
+
+
+<h3>Podaj link do aktualnego sezonu (łączy nas piłka)</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Przejdź do kolejnego kroku">
+</form>
+
+<p><a href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>

@@ -1,0 +1,23 @@
+{% load sort_table %}
+
+<div style="font-weight: bold;" hx-get="{% url 'refresh-time' id %}" hx-swap="outerHTML" hx-trigger="every 2s">
+
+{% if match.live %}
+{% if current_time|transform__match__minute %}
+    {{current_time|transform__match__minute}}
+    
+{% endif %}
+
+{% elif not match.live %}
+            
+            {% if not match.team_home_result %}
+                <p style="font-weight:bold">Mecz się jeszcze nie rozpoczął</p>
+            {% endif %}
+
+            {% if match.team_home_result %}
+                <p style="font-weight:bold">Koniec Meczu</p>
+            {% endif %}
+{% endif %}
+
+
+</div>

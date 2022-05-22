@@ -1,0 +1,200 @@
+{% extends 'base/main.html' %}
+
+{% load static %}
+{% load sort_table %}
+
+
+{% block content %}
+<section class="detail__match__container">
+    <div class="detail__match__container__styl">
+        <div class="detail__match__upper">
+            <div class="detail__match__upper__left">
+                {% if team_home_profile.arms_of_team %}
+                    <img src="{{team_home_profile.arms_of_team.url}}" class="responsive">
+                {% endif %}
+                <a href="{% url 'detail-name' match.team_home.id %}" style="text-decoration: none; color: black;" class="detail__match__team__name">{{match.team_home}}</a>
+                <div class="detail__match__form_graph_styl">
+                    {% for form in team_home_form_graph %}
+                    {% if form == 'Z' %}
+                        <div class="detail__match__form__graph" style="background-color: #009900;"><span class="detail__match__form__graph_title">Z</span></div>
+                    {% elif form == 'R' %}
+                        <div class="detail__match__form__graph" style="background-color: #cccc00;"><span class="detail__match__form__graph_title">R</span></div>
+                    {% elif form == 'P' %}
+                        <div class="detail__match__form__graph" style="background-color: #e60000;"><span class="detail__match__form__graph_title">P</span></div>
+                    {% endif %}
+                    {% endfor %}
+            
+                </div>
+            </div>
+            <div class="detail__match__upper__center">
+                <div>
+                    <p>{{match.day|date:"d.m.Y"}}</p>
+                    <p>{{match.hour|time:"H:i"}}</p>
+                    <div hx-get="{% url 'refresh-result' match.id %}" hx-swap="outerHTML" hx-trigger="every 2s"></div>
+                    <div hx-get="{% url 'refresh-time' match.id %}" hx-swap="outerHTML" hx-trigger="every 2s"></div>
+                    <div class="detail__match__uppper_down">
+                        <p>Sędzia: {{match.referee}}</p>
+                        <p>Stadion: {{stadium}}</p>
+                    </div>
+                    {{match.match_info}}
+                </div>
+            </div>
+            <div class="detail__match__upper__right">
+                {% if team_versus_profile.arms_of_team %}
+                <img src="{{team_versus_profile.arms_of_team.url}}" class="responsive">
+                {% endif %}
+                <a href="{% url 'detail-name' match.team_versus.id %}" style="text-decoration: none; color: black;"  class="detail__match__team__name">{{match.team_versus}}</a>
+                <div class="detail__match__form_graph_styl">
+                    {% for form in team_versus_form_graph %}
+                    {% if form == 'Z' %}
+                        <div class="detail__match__form__graph" style="background-color: #009900;"><span class="detail__match__form__graph_title">Z</span></div>
+                    {% elif form == 'R' %}
+                        <div class="detail__match__form__graph" style="background-color: #cccc00;"><span class="detail__match__form__graph_title">R</span></div>
+                    {% elif form == 'P' %}
+                        <div class="detail__match__form__graph" style="background-color: #e60000;"><span class="detail__match__form__graph_title">P</span></div>
+                    {% endif %}
+                    {% endfor %}          
+                </div>               
+             </div>
+        </div>
+
+        <div class="detail__match__down">
+            <div class="detail__match__down_left">
+
+                <section class="timetable__container">
+                    <div class="timetable__container__sty">
+                     <div class="actuall__timetables">
+                                
+                                        <span class="styl__round__number" style="margin-top: 10px;">
+                                            Mecze bezpośrednie</span>
+                                        <div class="timetable__styl">
+                                            {% for match in direct_matches %}
+                                            <div class="date__timetable tooltip">
+                                                {{match.day|date:"d.m.Y"}}
+                                                {{match.season}}
+                                            </div>
+                                            <div class="team__home__styl">
+                                                <a href="" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_home}}</a>
+                                            </div>
+                                            
+                    
+                                            <div class="result__styl">
+                                                <span style="text-decoration: none; color: black;">{{match.team_home_result}} - {{match.team_versus_result}}</span>
+                                            </div>
+                    
+                                            <div class="team__versus__styl">
+                                                <span style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_versus}}</span>
+                                            </div>
+                                            {% endfor %}
+
+                                            
+                                        </div>
+                                        
+                                        
+                                </div>
+                            </div>
+                </section>
+
+            </div>
+
+            <div class="detail__match__down_right">
+                <section class="timetable__container">
+                    <div class="timetable__container__sty">
+                     <div class="actuall__timetables">
+                                
+                                        <span class="styl__round__number" style="margin-top: 10px;">
+                                            Ostatnie Mecze: {{match.team_home}} </span>
+                                        <div class="timetable__styl">
+                                            {% for match in last_five_team_home_matches %}
+                                            <div class="date__timetable tooltip">
+                                                {{match.day|date:"d.m.Y"}}
+                                            </div>
+                                            <div class="team__home__styl">
+                                                <a href="{% url 'detail-name' match.team_home.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_home}}</a>
+                                            </div>
+                                            
+                    
+                                            <div class="result__styl">
+                                                <a href="{% url 'detail_match' match.id %}" style="text-decoration: none; color: black;">{{match.team_home_result}} - {{match.team_versus_result}}</a>
+                                            </div>
+                    
+                                            <div class="team__versus__styl">
+                                                <a href="{% url 'detail-name' match.team_versus.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_versus}}</a>
+                                            </div>
+                                            {% endfor %}
+                    
+                                            
+                                        </div>
+                                        
+                                        
+                                </div>
+                            </div>
+                </section>
+                <section class="timetable__container">
+                    <div class="timetable__container__sty">
+                     <div class="actuall__timetables">
+                                
+                                        <span class="styl__round__number" style="margin-top: 10px;">
+                                            Ostatnie Mecze: {{match.team_versus}} </span>
+                                        <div class="timetable__styl">
+                                            {% for match in last_five_team_versus_matches %}
+                                            <div class="date__timetable tooltip">
+                                                {{match.day|date:"d.m.Y"}}
+                                                
+                                            </div>
+                                            <div class="team__home__styl">
+                                                <a href="{% url 'detail-name' match.team_home.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_home}}</a>
+                                            </div>
+                                            
+                    
+                                            <div class="result__styl">
+                                                <a href="{% url 'detail_match' match.id %}" style="text-decoration: none; color: black;">{{match.team_home_result}} - {{match.team_versus_result}}</a>
+                                            </div>
+                    
+                                            <div class="team__versus__styl">
+                                                <a href="{% url 'detail-name' match.team_versus.id %}" style="text-decoration: none; color: black; background-color: #f2f2f2;">{{match.team_versus}}</a>
+                                            </div>
+                                            {% endfor %}
+                                            
+                                        </div>
+                                        
+                                        
+                                </div>
+                            </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="comment__container">
+        {% if user.is_authenticated %}
+            <div class="comment__container__styl">
+                <h1>Dodaj komentarz do meczu:</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{comment.comment|addclass:'comment_input'}}
+            
+            <button style="background-color: green; width: 100%;" class="button-1">Dodaj komentarz</button>
+        </form>
+        {% endif %}
+{% for comment in all_comments %}
+
+<div class="comment__render__container">
+<div class="comment__render__particular">
+    <h4>{{comment.user}}</h4> 
+    <p>{{comment.comment}}</p>
+</div>
+</div>
+{% endfor %}
+</div>
+</section>
+{% endblock content %}
+  
+
+
+
+
+
+
+

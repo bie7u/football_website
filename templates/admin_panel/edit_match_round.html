@@ -1,0 +1,11 @@
+<h1>Edytuj mecz</h1>
+
+<p>{{choose_match_obj.team_home}}</p>
+<p>{{choose_match_obj.team_versus}}</p>
+<p>{{choose_match_obj.round}}</p>
+<p>{{choose_match_obj.league}}</p>
+<form method="POST">
+{% csrf_token %}
+{{form.as_p}}
+<input name="round" type="submit" >
+</form>

@@ -1,0 +1,25 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="main__user__container">
+        <div class="main__user__container_sc">
+            <div class="user__nav__container">
+                {% include 'user_panel/user_panel_nav.html' %}
+            </div>
+            <div class="user__work__part">
+                <div class="user__work__part__sc" style="padding: 20px;">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <h2 class='text-center m'>Jesteś pewny, że chcesz usunąć link?</h2>
+                        <div class='text-center'>
+                        <input class="button-1" type="submit" value="Tak" />
+                        <a class="button-2" href="{% url 'archives_seasons' %}">Anuluj </a>
+                        </div>
+                    </form>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

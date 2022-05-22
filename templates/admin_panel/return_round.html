@@ -1,0 +1,9 @@
+
+    <form method="POST">
+        {% csrf_token %}
+        <h2 class='text-center m'>Jesteś pewny, że chcesz oznaczyć runde jako nie zakończoną</h2>
+        <div class='text-center'>
+        <input type="submit" value="Tak" />
+        <a href="{% url 'modern_league_menu' league_id %}">Anuluj </a>
+        </div>
+    </form>

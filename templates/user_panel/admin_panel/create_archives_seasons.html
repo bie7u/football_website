@@ -1,0 +1,40 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="main__user__container">
+        
+    <div class="main__user__container_sc">
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+        <div class="user__work__part">
+            <div class="user__work__part__sc">
+                <h1 style="font-size:42px">Kontynuuj dodawanie ligi</h1>
+                <h3>Tworzysz lige o nazwie: {{league}}</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <h3>Dodaj archiwalne sezony ze strony <a href="http://www.90minut.pl/">90minut.pl</a></h3>
+                    {{form.link}}
+                    {{form.season}}
+                    <input type="submit" value="Dodaj">
+                </form>
+
+                {% for link in added_links %}
+                <div hx-target="this" hx-swap="outerHTML">
+                <p style="padding: 5px;"><a target="_blank" style="background-color: #f9d8b9; padding: 5px; text-decoration: none;" href="{{link.link}}">{{link.link}}</a>
+                    <span style="background-color: #a4570e; padding: 5px;">{{link.season}}</span> <button class="button-2" hx-post="{% url 'delete-link' link.id %}">Usuń</button></p> 
+                </div>
+                {% endfor %}
+                <a class="button-1" style="text-decoration: none;" href="{% url 'summary_create' %}">Przejdź do podsumowania</a>
+                <p><a style="width:60%; text-decoration:none" class="button-2" href="{% url 'deny_create' %}">Anuluj dodawanie ligi</a></p>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

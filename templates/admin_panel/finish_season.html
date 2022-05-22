@@ -1,0 +1,10 @@
+<h1>Zakończ sezon</h1>
+
+<h4>Jesteś pewien, że chcesz przenieść sezon {{obj.0.season}} do archiwum?</h4>
+<p>Działanie jest nieodwracalne</p>
+{{obj.0.league}}
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Tak">
+
+</form>

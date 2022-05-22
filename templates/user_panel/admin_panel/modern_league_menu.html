@@ -1,0 +1,67 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+<section class="main__user__container">
+  <div class="main__user__container_sc">
+      <div class="user__nav__container">
+          {% include 'user_panel/user_panel_nav.html' %}
+      </div>
+      <div class="user__work__part">
+          <div class="user__work__part__sc">
+              <span class="add__blog__entry__header">Zaktualizuj lige: {{league}}</span>
+              <p><a class="button-1" href="{% url 'info_about_league' league.id %}">Informacje</a></p>
+              <p><a class="button-1" href="{% url 'finish_season' league.id %}">Zakończ sezon</a></p>
+              <p><a class="button-1" href="{% url 'start_new_season' league.id %}">Rozpocznij nowy sezon</a></p>
+          </div>
+      </div>
+
+
+
+
+      <section class="moder__container__rounds">
+        <div class="moder__container__rounds__styl">
+                {% for i in convert_rounds %}
+                <div class="moder__container__buttons">
+                    <div class="moder__container__round">
+                        <a href="{% url 'edit_round' league.id i.id %}" class="moder__container__round_styl">{{i|del_}}</a>
+                    </div>
+                    <div class="moder__container__actual_round">
+                        {% if not league.id|actual__round:i.id %}
+                        <button hx-post="{% url 'set-actual-round' league.id i.id %}" class="button-3">Aktywuj kolejke</button>
+                        {% else %}
+                        <span>To jest aktualna kolejka</span>
+                        {% endif %}
+                    </div>
+                    <div class="moder__container__finished_round">
+                        {% if not league.id|end__round:i.id %}
+                        <button hx-post="{% url 'set-finish-round' league.id i.id %}" class="button-3" style="background-color: red;">Zakończ kolejke</button>
+                        {% else %}
+                        <span>Kolejka zakończyła się</span>
+                        {% endif %}
+                    </div>
+                    <div class="moder__container__future_round">
+                        {% if not league.id|future__round:i.id %}
+                        <button hx-post="{% url 'set-future-round' league.id i.id %}" class="button-3" style="background-color: brown;">Przyszła kolejka</button>
+                        {% else %}
+                        <span>Kolejka nie odbyła się</span>
+                        {% endif %}
+                    </div>  
+                </div>
+                {% endfor %}
+        </div>
+      </section>
+      
+  </div>
+
+  
+</section>
+
+
+
+
+
+
+
+{% endblock content %}

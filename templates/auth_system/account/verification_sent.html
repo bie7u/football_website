@@ -1,0 +1,15 @@
+{% extends "base/main.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+<section class="main__container">
+    <div class="main__container__opt">
+    <h1>{% trans "Zweryfikuj swój adres email" %}</h1>
+
+    <p>{% blocktrans %}Na podany przy rejestracji adres email została wysłana wiadomość weryfikacyjna. W celu weryfikacji wejdź w link wysłany w wiadomości. {% endblocktrans %}</p>
+    </div>
+</section>
+{% endblock %}

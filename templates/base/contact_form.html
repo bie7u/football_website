@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %}
+
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="contact__container">
+    <span class="add__blog__entry__header"">Skontaktuj się z nami za pomocą formularza</span>
+    {% if user.is_authenticated %}
+        <span>Email podany przy rejestracji: <strong>{{request.user.email}}</strong></span>
+    {% endif %}
+    <div class="contact__container__sc">
+        <form method="POST">
+            {% csrf_token %}
+            <p>{{form.user_email|addclass:"style_input_th"}}</p>
+            <p>{{form.text|addclass:"style_input_th"}}</p>
+            <input type="submit" value="Wyślij wiadomość" class="league__timetable__section_s">
+        </form>
+        {% for message in messages %}
+        <span style="text-align:center"><h3>{{message}}</h3></span>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endblock content %}

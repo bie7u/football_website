@@ -1,0 +1,23 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<section class="main__user__container">
+    <div class="main__user__container_sc">
+        <div class="user__work__part">
+            <div class="user__work__part__sc" style="padding:50px">
+                <span class="add__blog__entry__header">Wybierz lige, którą chcesz zobaczyć: </span>
+
+                {% for league in leagues %}
+                
+                <a style="text-decoration: none;" href="{% url 'show_league' league.id %}"><p class="choose__league__styl">{{league}}</p></a>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

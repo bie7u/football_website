@@ -1,0 +1,14 @@
+
+<div hx-target="this" hx-swap="outerHTML">
+    <form method="POST">
+        {% csrf_token %}
+
+        <span><span>Nazwa ligi: </span>{{form.league}}</span>
+    
+        {% if obj %}
+        <button class="button-2" style="background-color: green;" hx-post="{% url 'update-name-league' obj.id %}">Zaktualizuj</button>
+        {% else %}
+        <button hx-post=".">Submit</button>
+        {% endif %}
+    </form>
+</div>

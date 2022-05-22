@@ -1,0 +1,47 @@
+<h1>Zaktualizuj lige : {{league}}</h1>
+<hr>
+
+<p><a href="{% url 'info_about_league' league.id %}">Informacje</a></p>
+<p><a href="{% url 'finish_season' league.id %}">Zakończ sezon</a></p>
+<p><a href="{% url 'start_new_season' league.id %}">Rozpocznij nowy sezon</a></p>
+
+
+
+
+<h3>Aktualna kolejka</h3>
+{% if actual_round %}
+<a href="{% url 'edit_round' league.id actual_round.id %}">{{actual_round}}</a>
+
+{% elif not actual_round %}
+<p>Nie masz aktualnie wybranej żadnej kolejki</p>
+{% endif %}
+<hr>
+<form method="POST">
+{% csrf_token %}
+<select name="r">
+{% for i in form %}
+  <option>{{i}}</option>
+{% endfor %}
+  </select>
+<input name="round" type="submit" >
+</form>
+
+{% for i in a %}
+
+<p>{{i}} {{i.day|date:"d.m.Y"}} {{i.hour|time:"H:i"}} {{i.round}}</p>
+
+{% endfor %}
+
+<h3>Zakończone kolejki: </h3>
+{% for i in finished_rounds %}
+
+<p><a href="{% url 'edit_round' league.id i.id %}">{{i}}</a> | <a href="{% url 'return_round' league.id i.id %}">Dodaj jako nierozegraną</a></p>
+
+{% endfor %}
+
+<h3>Przyszłe kolejki: </h3>
+{% for i in future_rounds %}
+
+<p><a href="{% url 'edit_round' league.id i.id %}">{{i}}</a></p>
+
+{% endfor %}

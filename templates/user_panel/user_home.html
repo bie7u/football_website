@@ -1,0 +1,32 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load sort_table %}
+
+{% block content %}
+
+<section class="main__user__container">
+        
+    <div class="main__user__container_sc">
+
+        <div class="user__nav__container">
+            {% include 'user_panel/user_panel_nav.html' %}
+        </div>
+
+        <div class="user__work__part">
+            <div class="user__work__part__sc">
+                {% if results_to_edit %}
+                <span class="add__blog__entry__header">Prośby o aktualizacje wyników</span>
+                {% for result in results_to_edit %}
+                <div class="result__edit__container">
+                    <p>{{result.team_home_sc}} <strong>{{result.result_team_home}} - {{result.result_team_versus}}</strong> {{result.team_versus_sc}}
+                        | {{result.time_of_edit|date:"d.m.Y H:i"}}<p><button class="button-3" hx-get="{% url 'actual-match-result' result.match.id result.id %}">Zaakceptuj</button> <button class="button-2" hx-get="{% url 'deny-match-result' result.id %}">Odrzuć</button></p> </p>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}

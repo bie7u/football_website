@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wyniki.pl</title>
+    <link rel="stylesheet" type='text/css' media='screen' href="https://devbiel-s3-bucker.s3.eu-central-1.amazonaws.com/static/styles/style.css">
+    <script src="https://devbiel-s3-bucker.s3.eu-central-1.amazonaws.com/static/styles/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/ad507b054d.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+</head>
+<!--  -->
+<body>
+    
+    {% include 'base/navbar.html' %}
+
+    {% block content %}
+
+
+    {% endblock content %}
+    
+    {% include 'base/footer.html' %}
+
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+</body>
