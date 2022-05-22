@@ -46,8 +46,6 @@ https://user-images.githubusercontent.com/83407728/169259016-11578a50-b65d-490d-
  - ### Set today and live matches:
 &emsp; This feature use a django_celery_beat, htmx, and pymessenger2 (to connect with messenger and set bot). The page have a special subpage "NA ŻYWO" in which automatically add a today matches. If the match start, there set to 'live' using celery beat. Any users can send a actual result of match using messenger. Enough write any message and messenger bot automatically send a link with edit result request. When user send a 'live' result of match. Admin or Editor must accept a request in special menu. Subpage 'NA ŻYWO' use a htmx to auto refresh result and minute of match. 
 
-    WARNING: Live matches can not working correctly, because heroku is on free version and not give oportunity to 'celery beat' to 'beat' every time.
-
 
 https://user-images.githubusercontent.com/83407728/169329407-4ea502c2-11d5-4105-b5db-31173ef60bc3.mp4
 
@@ -61,7 +59,7 @@ https://user-images.githubusercontent.com/83407728/169329407-4ea502c2-11d5-4105-
  - ### Blog system:
  &emsp; Everyone can add a article to blog, but users with group 'user' after added must wait for accept from editor or admin. In every article all login in users can add a comment. If you add a option 'artykuł sponsorowany' your entry show on home page (can show only 5 latest entries). If you click 'CZYTAJ WIĘCEJ' you see all articles. You can sorted in by league. In rights side of article details you can see a last 5 'sponsor entries'. 
  
- ## Watch presentation on youtube (in polish language) [_https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel ](https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel)
+ #### Watch presentation on youtube (in polish language) [_https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel ](https://www.youtube.com/watch?v=tN_QU9bzfv8&ab_channel=KrystianBiel)
 
 ## Deploy
 I'm using heroku to host website. Heroku redis is need to django celery. I'm connect my project with AMAZON AWS S3 to host static files. 
