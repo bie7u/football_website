@@ -10,6 +10,6 @@ urlpatterns = [
     path('refresh_result/<int:id>', views.refreshResult, name='refresh-result'),
     path('edit_result/<int:id>', views.editResult, name='edit-result'),
 
-    re_path(r'^cfb6b7a68cd7d310ee36e410c06df4dac3bda47ac9052cd631/?$', messenger_set.YoMamaBotView.as_view()),
+    re_path(r'^***/?$', messenger_set.YoMamaBotView.as_view()), # Personal link from Facebook API
 
 ]
