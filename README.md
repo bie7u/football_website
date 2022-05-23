@@ -64,9 +64,9 @@ https://user-images.githubusercontent.com/83407728/169329407-4ea502c2-11d5-4105-
 ## Deploy
 I'm using heroku to host website. Heroku redis is need to django celery. I'm connect my project with AMAZON AWS S3 to host static files. 
 
-Test admin account: 
-login: biel
-password: admin2002
+##### Test admin account: 
+- login: biel
+- password: admin2002
 
 ## Room for Improvement
 
